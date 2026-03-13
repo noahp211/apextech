@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>About ApexTech</title>
+    <div th:insert="fragments/base :: assetsHead"></div>
+</head>
+<body>
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+    <div class="container mt-5">
+        <h2>About ApexTech</h2>
+        <p>
+            ApexTech is an inventory and product management platform designed
+            for technology retailers. It allows administrators to manage
+            electronics such as laptops, smartphones, gaming devices,
+            and accessories.
+        </p>
+
+        <p>
+            Users can browse products, filter by category and brand,
+            and easily add new products to the system using validated forms.
+        </p>
+    </div>
+<div th:insert="fragments/base :: assetsScripts"></div>
+</body>
+</html>

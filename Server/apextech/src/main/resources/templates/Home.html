@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ApexTech</title>
+    <div th:insert="fragments/base :: assetsHead"></div>
+</head>
+<body>
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+    <div class="container mt-5">
+        <div class="text-center">
+            <h1 class="display-4">Welcome to ApexTech</h1>
+            <p class="lead">
+                    ApexTech is a modern technology marketplace where users can browse, search,
+                    and manage electronic products including laptops, phones, and accessories.
+            </p>
+
+            <a class="btn btn-primary btn-lg" th:href="@{/products}">
+                Browse Products
+            </a>
+        </div>
+    </div>
+
+<div th:insert="fragments/base :: assetsScripts"></div>
+</body>
+</html>
