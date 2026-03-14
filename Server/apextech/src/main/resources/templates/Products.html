@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Products</title>
-    <div th:insert="fragments/base :: assetsHead"></div>
 </head>
 <body>
-    <nav th:replace="fragments/navbar :: navbar"></nav>
-    <div class="container mt-5">
-        <h2>Product Catalog</h2>
-        
-        <table class="table table-striped">
+    <h1>Product Catalog</h1>
 
-            <thead>
-                <tr>
+    <nav>
+        <a th:href="@{/}">Home</a> |
+        <a th:href="@{/products/add}">Add Product</a>
+    </nav>
+
+    <table border="1" cellpadding="8">
+        <thead>
+            <tr>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Brand</th>
                 <th>Category</th>
                 <th>Price</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr th:each="product : ${products}">
+                <th>Stock</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.id}"></td>
                 <td th:text="${product.name}"></td>
                 <td th:text="${product.brand}"></td>
                 <td th:text="${product.category}"></td>
                 <td th:text="${product.price}"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-<div th:insert="fragments/base :: assetsScripts"></div>
+                <td th:text="${product.stock}"></td>
+                <td th:text="${product.createdAt}"></td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
