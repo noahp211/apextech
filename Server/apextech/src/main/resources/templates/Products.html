@@ -12,6 +12,27 @@
         <a th:href="@{/products/add}">Add Product</a>
     </nav>
 
+    <hr>
+
+    <form th:action="@{/products}" method="get">
+        <label for="keyword">Search by Name:</label>
+        <input type="text" id="keyword" name="keyword" th:value="${keyword}">
+
+        <label for="sortBy">Sort By:</label>
+        <select id="sortBy" name="sortBy">
+            <option value="">None</option>
+            <option value="name" th:selected="${sortBy == 'name'}">Name (A-Z)</option>
+            <option value="priceLowHigh" th:selected="${sortBy == 'priceLowHigh'}">Price (Low to High)</option>
+            <option value="priceHighLow" th:selected="${sortBy == 'priceHighLow'}">Price (High to Low)</option>
+            <option value="stock" th:selected="${sortBy == 'stock'}">Stock (High to Low)</option>
+        </select>
+
+        <button type="submit">Apply</button>
+        <a th:href="@{/products}">Reset</a>
+    </form>
+
+    <br>
+
     <table border="1" cellpadding="8">
         <thead>
             <tr>
@@ -25,6 +46,10 @@
             </tr>
         </thead>
         <tbody>
+            <tr th:if="${#lists.isEmpty(products)}">
+                <td colspan="7">No products found.</td>
+            </tr>
+
             <tr th:each="product : ${products}">
                 <td th:text="${product.id}"></td>
                 <td th:text="${product.name}"></td>
