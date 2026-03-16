@@ -3,44 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Product</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Add Product</h1>
-
-    <nav>
-        <a th:href="@{/}">Home</a> |
-        <a th:href="@{/products}">Products</a>
+<body class="bg-light">
+<div class="container py-4">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded px-3 mb-4">
+        <a class="navbar-brand" th:href="@{/}">ApexTech</a>
+        <div class="navbar-nav">
+            <a class="nav-link text-white" th:href="@{/}">Home</a>
+            <a class="nav-link text-white" th:href="@{/products}">Products</a>
+        </div>
     </nav>
 
-    <form th:action="@{/products/add}" th:object="${product}" method="post">
-        <div>
-            <label for="name">Name:</label>
-            <input type="text" id="name" th:field="*{name}" required>
-        </div>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h1 class="card-title mb-4">Add Product</h1>
 
-        <div>
-            <label for="brand">Brand:</label>
-            <input type="text" id="brand" th:field="*{brand}" required>
-        </div>
+            <form th:action="@{/products/add}" th:object="${product}" method="post">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Product Name</label>
+                    <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="Enter product name">
+                    <div class="text-danger mt-1" th:if="${errors['name'] != null}" th:text="${errors['name']}"></div>
+                </div>
 
-        <div>
-            <label for="category">Category:</label>
-            <input type="text" id="category" th:field="*{category}" required>
-        </div>
+                <div class="mb-3">
+                    <label for="brand" class="form-label">Brand</label>
+                    <select id="brand" th:field="*{brand}" class="form-select">
+                        <option value="">Select a brand</option>
+                        <option th:each="b : ${brands}" th:value="${b}" th:text="${b}"></option>
+                    </select>
+                    <div class="text-danger mt-1" th:if="${errors['brand'] != null}" th:text="${errors['brand']}"></div>
+                </div>
 
-        <div>
-            <label for="price">Price:</label>
-            <input type="number" id="price" step="0.01" th:field="*{price}" required>
-        </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <select id="category" th:field="*{category}" class="form-select">
+                        <option value="">Select a category</option>
+                        <option th:each="c : ${categories}" th:value="${c}" th:text="${c}"></option>
+                    </select>
+                    <div class="text-danger mt-1" th:if="${errors['category'] != null}" th:text="${errors['category']}"></div>
+                </div>
 
-        <div>
-            <label for="stock">Stock:</label>
-            <input type="number" id="stock" th:field="*{stock}" required>
-        </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="number" id="price" th:field="*{price}" step="0.01" min="0.01" class="form-control" placeholder="Enter price">
+                    <div class="text-danger mt-1" th:if="${errors['price'] != null}" th:text="${errors['price']}"></div>
+                </div>
 
-        <div>
-            <button type="submit">Add Product</button>
+                <div class="mb-3">
+                    <label for="stock" class="form-label">Stock</label>
+                    <input type="number" id="stock" th:field="*{stock}" min="0" class="form-control" placeholder="Enter stock quantity">
+                    <div class="text-danger mt-1" th:if="${errors['stock'] != null}" th:text="${errors['stock']}"></div>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary">Add Product</button>
+                    <a th:href="@{/products}" class="btn btn-outline-secondary">Back to Products</a>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
+</div>
 </body>
 </html>
