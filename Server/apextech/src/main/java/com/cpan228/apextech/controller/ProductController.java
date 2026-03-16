@@ -35,6 +35,11 @@ public class ProductController {
         return "home";
     }
 
+    @GetMapping("/about")
+    public String about() {
+        return "About";
+    }
+
     @GetMapping("/products")
     public String viewProducts(
             @RequestParam(required = false, defaultValue = "") String keyword,
