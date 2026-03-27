@@ -37,6 +37,13 @@ body {
     color: #fff ;
 }
 
+.nav-link-btn {
+    background: transparent;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+}
+
 /*homepage*/
 .hero {
     background: #1e2d4b;
@@ -269,4 +276,11 @@ body {
 
 .about-list li:last-child {
     border-bottom: none;
+}
+
+.auth-card {
+    max-width: 520px;
+    border: 1px solid #e3e7ee;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
 }
