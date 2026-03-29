@@ -25,7 +25,10 @@ public class RegistrationService {
         AppUser user = new AppUser();
         user.setUsername(form.getUsername().trim());
         user.setPassword(passwordEncoder.encode(form.getPassword()));
-        user.setRole("ROLE_CUSTOMER");
+
+        // ✅ CORRECT ROLE (DO NOT USE ROLE_ PREFIX HERE)
+        user.setRole("CUSTOMER");
+
         appUserRepository.save(user);
     }
 }

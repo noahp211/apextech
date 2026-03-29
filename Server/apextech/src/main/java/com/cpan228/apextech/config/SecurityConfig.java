@@ -21,19 +21,29 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/about", "/products", "/register", "/login", "/h2-console/**", "/css/**").permitAll()
-                        .requestMatchers("/products/add").hasAnyRole("ADMIN", "STAFF")
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .anyRequest().authenticated()
-                )
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/", true)
-                        .permitAll()
-                )
-                .logout(Customizer.withDefaults())
-                .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"));
+                .requestMatchers(
+                        "/",
+                        "/about",
+                        "/products",
+                        "/register",
+                        "/login",
+                        "/h2-console/**",
+                        "/css/**"
+                ).permitAll()
+
+                .requestMatchers("/products/add").hasAnyRole("ADMIN", "STAFF")
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+
+                .anyRequest().authenticated()
+        )
+        .formLogin(form -> form
+                .loginPage("/login")
+                .defaultSuccessUrl("/", true)
+                .permitAll()
+        )
+        .logout(Customizer.withDefaults())
+        .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
+        .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"));
 
         return http.build();
     }
