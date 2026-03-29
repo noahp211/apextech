@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Product</title>
+</head>
+<body>
+    <h1>Edit Product</h1>
+
+    <nav>
+        <a th:href="@{/}">Home</a> |
+        <a th:href="@{/products}">Products</a> |
+        <a th:href="@{/admin/products}">Admin Panel</a>
+    </nav>
+
+    <form th:action="@{/admin/products/edit}" th:object="${product}" method="post">
+        <input type="hidden" th:field="*{id}">
+
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" th:field="*{name}">
+            <div th:if="${errors['name']}" th:text="${errors['name']}"></div>
+        </div>
+
+        <div>
+            <label for="brand">Brand:</label>
+            <select id="brand" th:field="*{brand}">
+                <option value="">-- Select Brand --</option>
+                <option th:each="b : ${brands}" th:value="${b}" th:text="${b}"></option>
+            </select>
+            <div th:if="${errors['brand']}" th:text="${errors['brand']}"></div>
+        </div>
+
+        <div>
+            <label for="category">Category:</label>
+            <select id="category" th:field="*{category}">
+                <option value="">-- Select Category --</option>
+                <option th:each="c : ${categories}" th:value="${c}" th:text="${c}"></option>
+            </select>
+            <div th:if="${errors['category']}" th:text="${errors['category']}"></div>
+        </div>
+
+        <div>
+            <label for="price">Price:</label>
+            <input type="number" id="price" step="0.01" th:field="*{price}">
+            <div th:if="${errors['price']}" th:text="${errors['price']}"></div>
+        </div>
+
+        <div>
+            <label for="stock">Stock:</label>
+            <input type="number" id="stock" th:field="*{stock}">
+            <div th:if="${errors['stock']}" th:text="${errors['stock']}"></div>
+        </div>
+
+        <div>
+            <button type="submit">Update Product</button>
+        </div>
+    </form>
+</body>
+</html>
