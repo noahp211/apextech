@@ -20,8 +20,17 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(auth -> auth.requestMatchers("/register", "/login", "/h2-console/**", "/css/**").permitAll().anyRequest().permitAll())
-                .formLogin(form -> form.loginPage("/login").defaultSuccessUrl("/", true).permitAll())
+        http.authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/", "/about", "/products", "/register", "/login", "/h2-console/**", "/css/**").permitAll()
+                        .requestMatchers("/products/add").hasAnyRole("ADMIN", "STAFF")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .anyRequest().authenticated()
+                )
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/", true)
+                        .permitAll()
+                )
                 .logout(Customizer.withDefaults())
                 .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"));
