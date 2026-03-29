@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -108,6 +109,46 @@ public class ProductController {
         productRepository.save(product);
         return "redirect:/products";
     }
+
+    @GetMapping("/admin/products")
+public String adminProducts(Model model) {
+    model.addAttribute("products", productRepository.findAll());
+    return "AdminProducts";
+}
+
+@GetMapping("/admin/products/delete/{id}")
+public String deleteProduct(@PathVariable Long id) {
+    productRepository.deleteById(id);
+    return "redirect:/admin/products";
+}
+
+@GetMapping("/admin/products/edit/{id}")
+public String showEditForm(@PathVariable Long id, Model model) {
+    Product product = productRepository.findById(id).orElseThrow();
+
+    model.addAttribute("product", product);
+    model.addAttribute("brands", BRANDS);
+    model.addAttribute("categories", CATEGORIES);
+    model.addAttribute("errors", new LinkedHashMap<String, String>());
+
+    return "EditProduct";
+}
+
+@PostMapping("/admin/products/edit")
+public String updateProduct(@ModelAttribute Product product, Model model) {
+    Map<String, String> errors = validateProduct(product);
+
+    if (!errors.isEmpty()) {
+        model.addAttribute("product", product);
+        model.addAttribute("brands", BRANDS);
+        model.addAttribute("categories", CATEGORIES);
+        model.addAttribute("errors", errors);
+        return "EditProduct";
+    }
+
+    productRepository.save(product);
+    return "redirect:/admin/products";
+}
 
     private Map<String, String> validateProduct(Product product) {
         Map<String, String> errors = new LinkedHashMap<>();
