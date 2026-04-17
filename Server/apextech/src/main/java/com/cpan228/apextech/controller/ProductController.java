@@ -33,7 +33,7 @@ public class ProductController {
 
     @GetMapping("/")
     public String home() {
-        return "home";
+        return "Home";
     }
 
     @GetMapping("/about")
@@ -82,7 +82,7 @@ public class ProductController {
         model.addAttribute("brands", BRANDS);
         model.addAttribute("categories", CATEGORIES);
 
-        return "products";
+        return "Products";
     }
 
     @GetMapping("/products/add")
@@ -91,7 +91,7 @@ public class ProductController {
         model.addAttribute("brands", BRANDS);
         model.addAttribute("categories", CATEGORIES);
         model.addAttribute("errors", new LinkedHashMap<String, String>());
-        return "addproduct";
+        return "AddProduct";
     }
 
     @PostMapping("/products/add")
@@ -103,7 +103,7 @@ public class ProductController {
             model.addAttribute("brands", BRANDS);
             model.addAttribute("categories", CATEGORIES);
             model.addAttribute("errors", errors);
-            return "addproduct";
+            return "AddProduct";
         }
 
         productRepository.save(product);
@@ -111,44 +111,44 @@ public class ProductController {
     }
 
     @GetMapping("/admin/products")
-public String adminProducts(Model model) {
-    model.addAttribute("products", productRepository.findAll());
-    return "AdminProducts";
-}
+    public String adminProducts(Model model) {
+        model.addAttribute("products", productRepository.findAll());
+        return "AdminProducts";
+    }
 
-@GetMapping("/admin/products/delete/{id}")
-public String deleteProduct(@PathVariable Long id) {
-    productRepository.deleteById(id);
-    return "redirect:/admin/products";
-}
+    @GetMapping("/admin/products/delete/{id}")
+    public String deleteProduct(@PathVariable Long id) {
+        productRepository.deleteById(id);
+        return "redirect:/admin/products";
+    }
 
-@GetMapping("/admin/products/edit/{id}")
-public String showEditForm(@PathVariable Long id, Model model) {
-    Product product = productRepository.findById(id).orElseThrow();
+    @GetMapping("/admin/products/edit/{id}")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Product product = productRepository.findById(id).orElseThrow();
 
-    model.addAttribute("product", product);
-    model.addAttribute("brands", BRANDS);
-    model.addAttribute("categories", CATEGORIES);
-    model.addAttribute("errors", new LinkedHashMap<String, String>());
-
-    return "EditProduct";
-}
-
-@PostMapping("/admin/products/edit")
-public String updateProduct(@ModelAttribute Product product, Model model) {
-    Map<String, String> errors = validateProduct(product);
-
-    if (!errors.isEmpty()) {
         model.addAttribute("product", product);
         model.addAttribute("brands", BRANDS);
         model.addAttribute("categories", CATEGORIES);
-        model.addAttribute("errors", errors);
+        model.addAttribute("errors", new LinkedHashMap<String, String>());
+
         return "EditProduct";
     }
 
-    productRepository.save(product);
-    return "redirect:/admin/products";
-}
+    @PostMapping("/admin/products/edit")
+    public String updateProduct(@ModelAttribute Product product, Model model) {
+        Map<String, String> errors = validateProduct(product);
+
+        if (!errors.isEmpty()) {
+            model.addAttribute("product", product);
+            model.addAttribute("brands", BRANDS);
+            model.addAttribute("categories", CATEGORIES);
+            model.addAttribute("errors", errors);
+            return "EditProduct";
+        }
+
+        productRepository.save(product);
+        return "redirect:/admin/products";
+    }
 
     private Map<String, String> validateProduct(Product product) {
         Map<String, String> errors = new LinkedHashMap<>();
