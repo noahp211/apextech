@@ -52,4 +52,19 @@ Description
 Description
 
 ### Mushfika Hossain
-Description
+- Navigation & Pages: 
+    - Designed and refined the main navigation flow and page structure so users can move clearly between Home, Products, About, Roles, Login, and admin focused pages.
+- Presentation & Styling: 
+    -  Improved the overall UI polish with consistent spacing, typography, colors, cards, and form/table styling.
+- Users and Registration:
+    - Implemented and stabilized user registration with validation, including account creation and default role handling for new users.
+- Login Page: 
+    - Created the login page with validation, includes better messaging and role based test account visibility for easier evaluation.
+- Created Pages
+    - Created About and Roles pages to describe the application purpose and role guide descriptions
+- Application Stability & Completion: 
+    - Added and verified roles access control across ADMIN, `STAFF`, and `CUSTOMER`, including route restrictions and capability boundaries.
+    - Added ability to manage users from admin page
+    - Updated styling to be more refined
+- README & Project Clarity: 
+    - Structured and clarified project documentation to better explain application purpose, setup, and deployment.
