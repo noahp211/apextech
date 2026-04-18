@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Users - ApexTech</title>
+    <div th:insert="fragments/base :: assetsHead"></div>
+</head>
+<body>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="mb-1">User Management</h1>
+            <p class="text-muted mb-0">View sample accounts, update roles, or remove users.</p>
+        </div>
+        <a class="btn btn-outline-primary" th:href="@{/roles}">View Role Guide</a>
+    </div>
+
+    <div class="card">
+        <div class="table-responsive">
+            <table class="table table-striped mb-0 align-middle">
+                <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Update Role</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.username}"></td>
+                    <td>
+                        <span class="badge text-bg-dark" th:text="${user.role}"></span>
+                    </td>
+                    <td>
+                        <form th:action="@{'/admin/users/' + ${user.id} + '/role'}" method="post" class="d-flex gap-2">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                            <select name="role" class="form-select form-select-sm" style="max-width: 160px;">
+                                <option value="ADMIN" th:selected="${user.role == 'ADMIN'}">ADMIN</option>
+                                <option value="STAFF" th:selected="${user.role == 'STAFF'}">STAFF</option>
+                                <option value="CUSTOMER" th:selected="${user.role == 'CUSTOMER'}">CUSTOMER</option>
+                            </select>
+                            <button type="submit" class="btn btn-sm btn-primary">Save</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{'/admin/users/' + ${user.id} + '/delete'}" method="post">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this user?');">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div th:insert="fragments/base :: assetsScripts"></div>
+</body>
+</html>

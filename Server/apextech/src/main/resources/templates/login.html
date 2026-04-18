@@ -24,6 +24,14 @@
             <div th:if="${param.logout}" class="alert alert-info" role="alert">
                 You have been logged out.
             </div>
+            <div class="alert alert-secondary" role="alert">
+                Sample accounts for testing:
+                <ul class="mb-0 mt-2">
+                    <li><strong>Admin:</strong> admin / admin123</li>
+                    <li><strong>Staff:</strong> staff / staff123</li>
+                    <li><strong>Customer:</strong> customer / customer123</li>
+                </ul>
+            </div>
 
             <form th:action="@{/login}" method="post" class="d-grid gap-3">
                 <div>

@@ -25,12 +25,20 @@
                     <a class="nav-link" th:href="@{/products}">Products</a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'STAFF')">
                     <a class="nav-link" th:href="@{/products/add}">Add Product</a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/about}">About</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/roles}">Roles</a>
+                </li>
+
+                <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                    <a class="nav-link" th:href="@{/admin/users}">Users</a>
                 </li>
 
                 <li class="nav-item" sec:authorize="isAnonymous()">

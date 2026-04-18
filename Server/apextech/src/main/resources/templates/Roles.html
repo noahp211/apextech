@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Roles - ApexTech</title>
+    <div th:insert="fragments/base :: assetsHead"></div>
+</head>
+<body>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+
+<div class="container py-5">
+    <div class="row g-4">
+        <div class="col-lg-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="card-title">Admin</h3>
+                    <p class="card-text">Full control over the system.</p>
+                    <ul>
+                        <li>Managge all products</li>
+                        <li>View and delete users</li>
+                        <li>Change user roles</li>
+                        <li>Access admin only pages</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="card-title">Staff</h3>
+                    <p class="card-text">Operational access for catalog updates.</p>
+                    <ul>
+                        <li>Add new products</li>
+                        <li>Browse products</li>
+                        <li>Cannot delete users</li>
+                        <li>Cannot change roles</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="card-title">Customer</h3>
+                    <p class="card-text">Only shopping access.</p>
+                    <ul>
+                        <li>Browse and search products</li>
+                        <li>Register and log in</li>
+                        <li>Cannot add or edit products</li>
+                        <li>Cannot access admin tools</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:insert="fragments/base :: assetsScripts"></div>
+</body>
+</html>
