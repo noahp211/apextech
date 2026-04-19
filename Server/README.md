@@ -41,6 +41,11 @@ Roles usernames and passwords to test the site:
 
 ### Noah Park
 Description
+Verified system integration across application layers (controller, service, repository, database)
+- Added system endpoints (`/api/system/health`, `/api/system/integration`) to test backend connectivity and integration
+- Tested application using Docker Compose to ensure backend and database run together correctly
+- Demonstrated request flow from frontend to backend and database during presentation
+- Highlighted integration of Spring Security within the application flow
 
 ### Bimal Gurung
 Description
