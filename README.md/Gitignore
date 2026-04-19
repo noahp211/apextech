@@ -1,1 +1,18 @@
 READ ME
+
+## Member 1 – Deployment & Environment (Bimal Gurung)
+
+- Dockerized the Spring Boot application using a Dockerfile
+- Configured a MySQL database using Docker Compose
+- Added `docker-compose.yml` to run both the application and database together
+- Implemented Spring profiles:
+  - `dev` → H2 database for local development
+  - `qa` → MySQL database for Docker/QA environment
+- Ensured the application can switch environments without code changes
+
+## Run with Docker
+
+```bash
+cd Server/apextech
+mvn clean package
+docker compose up --build
