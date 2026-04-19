@@ -14,28 +14,22 @@ Core features:
 
 ## How to Run With Docker
 
-### Prerequisites
+### Steps
+1. Docker Desktop must be running. (Download: https://www.docker.com/products/docker-desktop)
+2. Open a terminal in the backend folder that contains `docker-compose.yml`:
+    - `cd apextech/Server/apextech`
+3. Build and start the app:
+    - `docker compose build`
+    - `docker compose up -d`
+4. Open:
+    - `http://localhost:8080`
 
-
-### 1. Step
-Description
-
-### 2. Step
-Description
-
-### 3. Step
-Description
-
-## Setup Steps and Environment Variables
-
-### 1
-Description
-
-### 2
-Description
-
-### 3
-Description
+### Other Notes
+- Docker version check:
+  - `docker --version`
+- Cleanup when stopping/resetting:
+  - `docker compose down`
+  - `docker compose down -v`
 
 ## Test Roles
 Roles usernames and passwords to test the site:
